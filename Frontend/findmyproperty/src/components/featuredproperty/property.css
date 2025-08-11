@@ -1,0 +1,99 @@
+.property-section {
+  padding: 4rem 2rem;
+  background-color: #f2f2f2;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  color: #222;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.property-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.property-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.property-info {
+  padding: 1rem 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.property-info h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.3rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.property-info p {
+  margin: 0.3rem 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.property-info strong {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  color: #0077ff;
+  font-weight: 600;
+}
+
+.property-info small {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.btn {
+  background: linear-gradient(90deg, #0077ff, #00bfff);
+  border: none;
+  color: white;
+  padding: 0.8rem 1.8rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.btn:hover {
+ transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}

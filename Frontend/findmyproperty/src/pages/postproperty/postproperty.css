@@ -1,0 +1,134 @@
+.add-property-section {
+  padding: 5rem 2rem;
+  background: url('https://media.istockphoto.com/id/1468455696/photo/contemporary-luxury-spacious-home-corridor-through-living-room-with-amazing-large-glass-wall.webp?a=1&b=1&s=612x612&w=0&k=20&c=8lrKHcLviHIm6bd7iCYzfv15kGLbR5SusTnasgwHxQg=') no-repeat center center/cover;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.add-property-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 3rem;
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  z-index: 1;
+  position: relative;
+}
+
+
+.add-property-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.property-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.property-form select {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #f9f9f9;
+}
+
+
+.property-form input,
+.property-form textarea {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #f9f9f9;
+}
+
+.file-label {
+  font-weight: 600;
+  margin-top: 1rem;
+  color: #333;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.img-box {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.img-box img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.img-box button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 4px 7px;
+  transition: background 0.3s;
+}
+
+.img-box button:hover {
+  background: red;
+}
+
+.submit-btn {
+  background: linear-gradient(to right, #0077ff, #00c6ff);
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.property-form input,
+.property-form select,
+.property-form textarea {
+  background: rgba(255, 255, 255, 0.9);
+  color: #222;
+}
+
+.submit-btn {
+  background: linear-gradient(to right, #00c6ff, #0077ff);
+}

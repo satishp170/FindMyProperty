@@ -1,0 +1,14 @@
+/* src/components/ListingCard.css */
+.listing-card {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: background 0.2s;
+}
+
+.listing-card:hover {
+  background-color: #e6f0ff;
+}
