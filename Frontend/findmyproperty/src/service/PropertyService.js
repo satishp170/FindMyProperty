@@ -117,10 +117,27 @@ class PropertyService {
     }
 
 
-    // updateData(sjsp) {
-    //     let myheader = { 'content-type': 'application/json' }
-    //     return axios.put(baseUrl + "sjsps/" + sjsp.sjspid, sjsp, { headers: myheader });
-    // }
+    async editProperty(pid, property) {
+        try {
+            const token = localStorage.getItem("jwt");
+
+            if (!token || token.trim() === "") {
+                throw new Error("JWT token missing or empty");
+            }
+
+            const response = await axios.put(`${baseUrl}edit/${pid}`, property, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            return response.data;
+        } catch (error) {
+            console.error(`Error updating property with ID ${pid}:`, error);
+            throw error;
+        }
+    }
 
     // deleteData(sjspid) {
     //     return axios.delete(baseUrl + "sjsps/" + sjspid);

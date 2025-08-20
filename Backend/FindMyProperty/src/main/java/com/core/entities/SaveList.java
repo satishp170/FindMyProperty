@@ -1,6 +1,7 @@
 package com.core.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
@@ -22,14 +23,14 @@ import lombok.ToString;
 @AllArgsConstructor
 public class SaveList {
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "property_id")
-    private AvailableProperty property;
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "property_id", nullable = false)
+	private AvailableProperty property;
 
 }

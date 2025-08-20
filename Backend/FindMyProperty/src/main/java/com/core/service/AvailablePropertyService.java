@@ -7,8 +7,6 @@ import com.core.dto.AvailablePropertyReqDTO;
 import com.core.dto.AvailablePropertyRespDTO;
 import com.core.entities.Category;
 
-import jakarta.validation.Valid;
-
 public interface AvailablePropertyService {
 
 	List<AvailablePropertyRespDTO> showAllProperties();
@@ -17,7 +15,7 @@ public interface AvailablePropertyService {
 
 	AvailablePropertyRespDTO addProperty(AvailablePropertyReqDTO propertyReqDTO);
 
-	ApiResponse editProperty(@Valid AvailablePropertyReqDTO propertyReqDTO, Long propId);
+	ApiResponse editProperty(AvailablePropertyReqDTO propertyReqDTO, Long propId);
 
 	ApiResponse removeProperty(Long propId);
 

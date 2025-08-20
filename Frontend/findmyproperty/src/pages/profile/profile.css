@@ -48,7 +48,7 @@
   color: #fff;
   font-weight: 600;
   letter-spacing: 0.5px;
-  background-color: #007aff; /* universal color */
+  background-color: #007aff;
 }
 
 .actions {
@@ -80,8 +80,19 @@
   font-size: 1.5rem;
   margin-bottom: 1.2rem;
   color: #444;
+  text-align: center;
 }
 
+/*  Properties Grid */
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+/* ✅ Modal Styles */
 .modal {
   position: fixed;
   top: 50%;
@@ -111,7 +122,13 @@
   outline: none;
 }
 
-/* Optional: make profile layout responsive */
+/* ✅ Responsive Layout */
+@media (max-width: 1024px) {
+  .properties-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .profile-header {
     flex-direction: column;
@@ -133,5 +150,15 @@
   .actions button {
     width: 100%;
     margin: 0.5rem 0;
+  }
+
+  .properties-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .properties-grid {
+    grid-template-columns: 1fr;
   }
 }

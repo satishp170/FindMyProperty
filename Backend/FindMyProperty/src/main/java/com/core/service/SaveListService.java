@@ -13,4 +13,6 @@ public interface SaveListService {
 	ApiResponse removeItem(Long userId, Long propId);
 
 	List<AvailablePropertyRespDTO> getSavedPropertiesByUser(Long userId);
+
+	boolean isPropertySaved(Long userId, Long propId);
 }

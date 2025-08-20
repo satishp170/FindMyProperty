@@ -11,6 +11,6 @@ public interface SaveListDao extends JpaRepository<SaveList, SaveListId> {
 
 	List<SaveList> findByUser_Id(Long userId);
 
-
+	boolean existsByUserIdAndPropertyId(Long userId, Long propertyId);
 
 }

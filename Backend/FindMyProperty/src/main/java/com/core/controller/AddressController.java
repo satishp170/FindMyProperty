@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/properties")
+@RequestMapping("/address")
 @CrossOrigin(origins = "http://localhost:5173")
 @AllArgsConstructor
 public class AddressController {

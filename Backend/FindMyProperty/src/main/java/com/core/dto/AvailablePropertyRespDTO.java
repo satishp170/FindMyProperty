@@ -16,6 +16,7 @@ import lombok.ToString;
 public class AvailablePropertyRespDTO extends BaseDTO {
 	private String name;
 	private String sellerName;
+	private Long sellerId;
 	private Category category;
 	private AddressRespDTO address;
     private int beds;

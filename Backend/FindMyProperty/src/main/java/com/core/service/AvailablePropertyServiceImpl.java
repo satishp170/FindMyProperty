@@ -19,7 +19,6 @@ import com.core.entities.Category;
 import com.core.entities.User;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -36,6 +35,7 @@ public class AvailablePropertyServiceImpl implements AvailablePropertyService {
 		return availablePropertyDao.findAll().stream().map(property -> {
 			AvailablePropertyRespDTO dto = modelMapper.map(property, AvailablePropertyRespDTO.class);
 			dto.setSellerName(property.getSeller().getName());
+			dto.setSellerId(property.getSeller().getId());
 			return dto;
 		}).collect(Collectors.toList());
 	}
@@ -47,6 +47,7 @@ public class AvailablePropertyServiceImpl implements AvailablePropertyService {
 
 		AvailablePropertyRespDTO dto = modelMapper.map(property, AvailablePropertyRespDTO.class);
 		dto.setSellerName(property.getSeller().getName());
+		dto.setSellerId(property.getSeller().getId());
 		return dto;
 	}
 
@@ -63,13 +64,20 @@ public class AvailablePropertyServiceImpl implements AvailablePropertyService {
 	}
 
 	@Override
-	public ApiResponse editProperty(@Valid AvailablePropertyReqDTO propertyReqDTO, Long propId) {
+	public ApiResponse editProperty(AvailablePropertyReqDTO dto, Long propId) {
 		AvailableProperty property = availablePropertyDao.findById(propId)
 				.orElseThrow(() -> new ResourceNotFoundException("Property not found!!!"));
 
-		modelMapper.map(propertyReqDTO, property);
+		Address addr = property.getAddress();
+		modelMapper.map(dto.getAddress(), addr);
+		addressDao.save(addr);
+
+		modelMapper.map(dto, property);
+		property.setAddress(addr);
+
 		availablePropertyDao.save(property);
-		return new ApiResponse("user with id - " + propId + " updated successfully");
+
+		return new ApiResponse("Property with id - " + propId + " updated successfully");
 	}
 
 	@Override
@@ -88,6 +96,7 @@ public class AvailablePropertyServiceImpl implements AvailablePropertyService {
 		return availablePropertyDao.findByCategory(category).stream().map(property -> {
 			AvailablePropertyRespDTO dto = modelMapper.map(property, AvailablePropertyRespDTO.class);
 			dto.setSellerName(property.getSeller().getName());
+			dto.setSellerId(property.getSeller().getId());
 			return dto;
 		}).collect(Collectors.toList());
 	}
@@ -97,9 +106,9 @@ public class AvailablePropertyServiceImpl implements AvailablePropertyService {
 		return availablePropertyDao.findByFilters(loc, type, mxp).stream().map(property -> {
 			AvailablePropertyRespDTO dto = modelMapper.map(property, AvailablePropertyRespDTO.class);
 			dto.setSellerName(property.getSeller().getName());
+			dto.setSellerId(property.getSeller().getId());
 			return dto;
 		}).collect(Collectors.toList());
 	}
-	
 
 }

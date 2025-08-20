@@ -11,6 +11,7 @@ export class User {
     email,
     contactNo,
     dob,
+    imageUrl,
     address,
     role,
     avlProps = []
@@ -23,6 +24,7 @@ export class User {
     this.email = email;
     this.contactNo = contactNo;
     this.dob = dob;
+    this.imageUrl = imageUrl;
     this.address = new Address(address);
     this.role = role;
     this.avlProps = avlProps.map(prop => new Property(prop));

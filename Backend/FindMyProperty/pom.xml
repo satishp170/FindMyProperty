@@ -110,6 +110,13 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!--  cloudinary dependency  -->
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.37.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

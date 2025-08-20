@@ -37,43 +37,45 @@ public class SaveListServiceImpl implements SaveListService {
 		SaveListId id = new SaveListId(item.getUserId(), item.getPropertyId());
 
 		if (saveListDao.findById(id).isPresent())
-			throw new ApiException("Item already added!!!");
+			throw new ApiException("This property is already saved by the user.");
 
 		User user = userDao.findById(item.getUserId())
-				.orElseThrow(() -> new ResourceNotFoundException("User not found!!!"));
-		AvailableProperty property = availablePropertyDao.findById(item.getPropertyId())
-				.orElseThrow(() -> new ResourceNotFoundException("Property not found!!!"));
+				.orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + item.getUserId()));
+
+		AvailableProperty property = availablePropertyDao.findById(item.getPropertyId()).orElseThrow(
+				() -> new ResourceNotFoundException("Property not found with ID: " + item.getPropertyId()));
 
 		SaveList saveList = new SaveList(user, property);
-		user.addSaveListEntry(saveList);
+//		user.addSaveListEntry(saveList);
 		saveListDao.save(saveList);
 
-		return new ApiResponse("Item successfully added to your Save List!!!");
+		return new ApiResponse("Item successfully added to your Save List.");
 	}
-	
+
 	@Override
 	public List<AvailablePropertyRespDTO> getSavedPropertiesByUser(Long userId) {
-	    List<SaveList> savedEntries = saveListDao.findByUser_Id(userId);
+		List<SaveList> savedEntries = saveListDao.findByUser_Id(userId);
 
-	    return savedEntries.stream()
-	            .map(entry -> {
-	                AvailableProperty property = entry.getProperty();
-	                AvailablePropertyRespDTO dto = modelMapper.map(property, AvailablePropertyRespDTO.class);
-	                dto.setSellerName(property.getSeller().getName());
-	                return dto;
-	            })
-	            .collect(Collectors.toList());
+		return savedEntries.stream().map(entry -> {
+			AvailableProperty property = entry.getProperty();
+			AvailablePropertyRespDTO dto = modelMapper.map(property, AvailablePropertyRespDTO.class);
+			dto.setSellerName(property.getSeller().getName());
+			return dto;
+		}).collect(Collectors.toList());
 	}
-
 
 	@Override
 	public ApiResponse removeItem(Long userId, Long propId) {
 		SaveListId id = new SaveListId(userId, propId);
 		SaveList saveList = saveListDao.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Item not found!!!"));
-		saveList.getUser().removeSaveListEntry(saveList);
+//		saveList.getUser().removeSaveListEntry(saveList);
 		saveListDao.delete(saveList);
 		return new ApiResponse("Item successfully removed from your Save List!!!");
+	}
+
+	public boolean isPropertySaved(Long userId, Long propId) {
+		return saveListDao.existsByUserIdAndPropertyId(userId, propId);
 	}
 
 }

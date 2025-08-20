@@ -30,6 +30,7 @@ public class UserReqDTO {
 	private String contactNo;
 	@Past
 	private LocalDate dob;
+	private String imageUrl;
 	@NotNull
 	private AddressReqDTO address;
 	private Role role;

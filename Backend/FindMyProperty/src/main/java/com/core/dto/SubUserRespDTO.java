@@ -23,6 +23,7 @@ public class SubUserRespDTO extends BaseDTO {
 	private String email;
 	private String contactNo;
 	private LocalDate dob;
+	private String imageUrl;
 	private AddressRespDTO address;
 	private Role role;
 	private LocalDate startDate;

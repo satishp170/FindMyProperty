@@ -46,16 +46,19 @@ public class User extends BaseEntity  implements UserDetails{
 	private String contactNo;
 	@Column(nullable = false)
 	private LocalDate dob;
+	@Column(length = 100, nullable = false, unique = true)
+	private String imageUrl;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "address_id", nullable = false)
 	private Address address;
 	@Enumerated(EnumType.STRING)
 	private Role role;	//seller buyer trader
 
-	/*
-	 * ========================================================== For Available
-	 * Properties ==========================================================
-	 */
+	
+//	==========================================================
+//	For Available Properties
+//	==========================================================
+	 
 	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<AvailableProperty> avlProps = new ArrayList<>();
 
@@ -68,35 +71,34 @@ public class User extends BaseEntity  implements UserDetails{
 		avlProps.remove(property);
 		property.setSeller(null);
 	}
-
-	/*
-	 * ========================================================== For Sold
-	 * Properties ==========================================================
-	 */
-
-	/*
-	 * ========================================================== For Rental
-	 * Properties ==========================================================
-	 */
-
-	/*
-	 * ========================================================== For Save List
-	 * ==========================================================
-	 */
+	
+//	==========================================================
+//	For Sold Properties
+//	==========================================================
+	
+//	==========================================================
+//	For Rental Properties
+//	==========================================================
+	
+	
+//	==========================================================
+//	For Save List
+//	==========================================================
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<SaveList> saveList = new ArrayList<>();
 
 	public void addSaveListEntry(SaveList entry) {
-		saveList.add(entry);
-		entry.setUser(this);
+	    saveList.add(entry);
+	    entry.setUser(this);
 	}
 
 	public void removeSaveListEntry(SaveList entry) {
-		saveList.remove(entry);
-		entry.setUser(null);
+	    saveList.remove(entry);
+	    entry.setUser(null);
 	}
 
+	//==========================================================
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 	    return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.name()));

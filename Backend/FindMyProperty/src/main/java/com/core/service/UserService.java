@@ -26,4 +26,6 @@ public interface UserService {
 
 	ApiResponse changePassword(Long userId, @Valid ChangePasswordDTO changePass);
 
+	void updateUserImage(Long userId, String imageUrl);
+
 }

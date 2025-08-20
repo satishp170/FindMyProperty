@@ -41,7 +41,8 @@ public class SecurityConfiguration {
 		// 3. Authenticate any request
 		http.authorizeHttpRequests(request ->
 		// 4.permit all - swagger , view all restaurants , user signin , sign up....
-		request.requestMatchers("/swagger-ui/**", "/v**/api-docs/**", "/users/signin", "/users/signup").permitAll()
+		request.requestMatchers("/swagger-ui/**", "/v**/api-docs/**", "/users/signin", "/users/signup",
+				"/users/signup-with-image").permitAll()
 				// 6. restaurants - GET - to get all restaurants - no authentication
 				.requestMatchers(HttpMethod.GET, "/users").permitAll()
 				// get restaurant by id - customer

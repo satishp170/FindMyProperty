@@ -87,7 +87,13 @@ public class UserServiceImpl implements UserService {
 	public ApiResponse editUser(UserReqDTO userDto, Long userId) {
 		User user = userDao.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found!!!"));
 
+		Address addr = user.getAddress();
+		modelMapper.map(userDto.getAddress(), addr);
+		addressDao.save(addr);
+
 		modelMapper.map(userDto, user);
+		user.setAddress(addr);
+
 		userDao.save(user);
 		return new ApiResponse("user with id - " + userId + " updated successfully");
 	}
@@ -115,6 +121,13 @@ public class UserServiceImpl implements UserService {
 		});
 
 		return user;
+	}
+
+	@Override
+	public void updateUserImage(Long userId, String imageUrl) {
+		User user = userDao.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found!!!"));
+		user.setImageUrl(imageUrl);
+		userDao.save(user);
 	}
 
 }

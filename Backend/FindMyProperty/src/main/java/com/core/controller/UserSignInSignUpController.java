@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.core.dto.AuthResp;
 import com.core.dto.SignInDTO;
@@ -42,7 +44,7 @@ public class UserSignInSignUpController {
 	@Operation(description = "User sign in ")
 	public ResponseEntity<?> userSignIn(@RequestBody SignInDTO dto) {
 		System.out.println("in sign in " + dto);
-		//1. invoke AuthenticationMgr's authenticate method
+		// 1. invoke AuthenticationMgr's authenticate method
 
 //		 API
 //		1.1 Authentication authenticate(Authentication auth) 
@@ -73,10 +75,13 @@ public class UserSignInSignUpController {
 //		error - dup email - SC 400 | SC 409 , api resp - error mesg
 
 	@PostMapping("/signup")
-	public ResponseEntity<?> signupUser(@RequestBody @Valid UserReqDTO dto) {
-		System.out.println("in signup " + dto);
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.signUp(dto));
+	public ResponseEntity<?> signupWithImage(@RequestPart("user") @Valid UserReqDTO dto,
+			@RequestPart(value = "image", required = false) MultipartFile imageFile) {
 
+		String imageUrl = "https://cdn-edge.kwork.ru/files/avatar/large/22/14459570-1.jpg";
+
+		dto.setImageUrl(imageUrl);
+		return ResponseEntity.status(HttpStatus.CREATED).body(userService.signUp(dto));
 	}
 
 }

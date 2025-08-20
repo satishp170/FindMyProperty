@@ -63,6 +63,7 @@ public class JwtUtils {
 				// setting a custom claim , to add granted authorities
 				.claim("authorities", getAuthoritiesInString(userPrincipal.getAuthorities()))
 				.claim("uid", userPrincipal.getId())
+				.claim("role", userPrincipal.getRole())
 //				.claim("name", userPrincipal.getName())
 //	            .claim("photoURL", userPrincipal.getPhotoUrl())
 //	            .claim("plan", userPrincipal.getPlan())

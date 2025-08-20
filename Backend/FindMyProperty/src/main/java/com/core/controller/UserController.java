@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.core.dto.ChangePasswordDTO;
 import com.core.dto.UserReqDTO;
 import com.core.dto.UserRespDTO;
+import com.core.service.ImageService;
 import com.core.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,6 +33,7 @@ import lombok.AllArgsConstructor;
 public class UserController {
 
 	private final UserService userService;
+	private final ImageService imageService;
 
 	@GetMapping("/list")
 	@Operation(description = "To display all users")
@@ -71,6 +75,19 @@ public class UserController {
 	@Operation(description = "To display seller with properties")
 	public ResponseEntity<?> getSellerWithProperties(@PathVariable Long sellerId) {
 		return ResponseEntity.ok(userService.getSellerWithProperties(sellerId));
+	}
+
+	@PostMapping("/{userId}/changeimage")
+	@Operation(description = "To change user profile image")
+	public ResponseEntity<?> changeImage(@PathVariable Long userId, @RequestPart("image") MultipartFile imageFile) {
+		try {
+			String imageUrl = imageService.uploadImage(imageFile);
+			userService.updateUserImage(userId, imageUrl);
+			return ResponseEntity.ok("Image updated successfully");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Failed to update image: " + e.getMessage());
+		}
 	}
 
 }

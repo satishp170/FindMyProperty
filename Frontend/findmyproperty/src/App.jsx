@@ -13,100 +13,127 @@ import Plan from './pages/plans/Plan';
 import Profile from './pages/profile/Profile';
 import AuthRoute from './components/auth/AuthRoute';
 import EditProfilePage from './pages/edituser/EditProfilePage';
+import UserSaveList from './pages/userpropertieslist/UserSaveList';
+import SellerPropertyList from './pages/userpropertieslist/SellerPropertyList';
+import EditProperty from './pages/editproperty/EditProperty';
 
 
 function App() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [showLogin, setShowLogin] = useState(true);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [showLogin, setShowLogin] = useState(true);
 
-  const openLoginModal = () => {
-    setShowLogin(true);
-    setModalOpen(true);
-  };
+    const openLoginModal = () => {
+        setShowLogin(true);
+        setModalOpen(true);
+    };
 
-  return (
-    <AuthProvider>
-      <Navbar
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-      />
+    return (
+        <AuthProvider>
+            <Navbar
+                modalOpen={modalOpen}
+                setModalOpen={setModalOpen}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+            />
 
-      <Routes>
-        <Route path='/' element={<Navigate replace to="/home" />} />
-        <Route path='/home' element={<Home openLogin={openLoginModal} />} />
+            <Routes>
+                <Route path='/' element={<Navigate replace to="/home" />} />
+                <Route path='/home' element={<Home openLogin={openLoginModal} />} />
 
-        {/* Protected Routes */}
-        <Route
-          path='/property/:id'
-          element={
-            <AuthRoute onRequireLogin={openLoginModal}>
-              <PropertyDetails />
-            </AuthRoute>
-          }
-        />
-        <Route
-          path='/properties'
-          element={
-            <AuthRoute onRequireLogin={openLoginModal}>
-              <PropertyList />
-            </AuthRoute>
-          }
-        />
-        <Route
-          path='/searchproperties'
-          element={
-            <AuthRoute onRequireLogin={openLoginModal}>
-              <SearchPropertyList />
-            </AuthRoute>
-          }
-        />
-        <Route
-          path='/category/:type'
-          element={
-            <AuthRoute onRequireLogin={openLoginModal}>
-              <CategoryPage />
-            </AuthRoute>
-          }
-        />
-        <Route
-          path='/:sid/addproperty'
-          element={
-            <AuthRoute onRequireLogin={openLoginModal}>
-              <PostProperty />
-            </AuthRoute>
-          }
-        />
-        <Route
-          path='/:uid/buyplan'
-          element={
-            <AuthRoute onRequireLogin={openLoginModal}>
-              <Plan />
-            </AuthRoute>
-          }
-        />
-        <Route
-          path='/profile/:uid'
-          element={
-            <AuthRoute onRequireLogin={openLoginModal}>
-              <Profile />
-            </AuthRoute>
-          }
-        />
-        <Route
-          path='/user/:uid/edit'
-          element={
-            <AuthRoute onRequireLogin={openLoginModal}>
-              <EditProfilePage />
-            </AuthRoute>
-          }
-        />
-      </Routes>
+                {/* Protected Routes */}
+                <Route
+                    path='/property/:id'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <PropertyDetails />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/properties'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <PropertyList />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/searchproperties'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <SearchPropertyList />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/category/:type'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <CategoryPage />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/:sid/addproperty'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <PostProperty />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/:uid/buyplan'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <Plan />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/profile/:uid'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <Profile />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/user/:uid/edit'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <EditProfilePage />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/user/:uid/savelist'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <UserSaveList />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/seller/:uid/properties'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <SellerPropertyList />
+                        </AuthRoute>
+                    }
+                />
+                <Route
+                    path='/property/edit/:pid'
+                    element={
+                        <AuthRoute onRequireLogin={openLoginModal}>
+                            <EditProperty />
+                        </AuthRoute>
+                    }
+                />
+            </Routes>
 
-      <Footer />
-    </AuthProvider>
-  );
+            <Footer />
+        </AuthProvider>
+    );
 }
 
 export default App;

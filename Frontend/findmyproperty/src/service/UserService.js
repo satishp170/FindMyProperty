@@ -84,17 +84,28 @@ class UserService {
         }
     }
 
+    async changeImage(uid, file) {
+        try {
+            const token = localStorage.getItem("jwt");
+            if (!token) throw new Error("JWT token not found");
 
-    // async getAllProperties() {
-    //     try {
-    //         const response = await axios.get(baseUrl + "list");
-    //         const propertyList = response.data.map(item => new Property(item));
-    //         return propertyList;
-    //     } catch (error) {
-    //         console.error("Error fetching properties:", error);
-    //         throw error;
-    //     }
-    // }
+            const formData = new FormData();
+            formData.append("image", file);
+
+            const response = await axios.post(`${baseUrl}${uid}/changeimage`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            return response.data;
+        } catch (error) {
+            console.error("Error changing image:", error);
+            throw error;
+        }
+    }
+
 }
 
 export default new UserService();

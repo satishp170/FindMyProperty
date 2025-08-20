@@ -44,6 +44,12 @@ public class SaveListController {
 		return ResponseEntity.ok(properties);
 	}
 
+	@GetMapping("/issave/{userId}/{propId}")
+	public ResponseEntity<?> isPropertySave(@PathVariable Long userId, @PathVariable Long propId) {
+	    boolean exists = saveListService.isPropertySaved(userId, propId);
+	    return ResponseEntity.ok(exists); // returns true or false
+	}
+
 	@DeleteMapping("/delete/{userId}/{propId}")
 	@Operation(description = "To delete user")
 	public ResponseEntity<?> removeItem(@PathVariable Long userId, @PathVariable Long propId) {
